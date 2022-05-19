@@ -21,7 +21,6 @@ if (!cached) {
 
 async function dbConnect() {
   if (cached.conn) {
-    console.log("Wee Woo");
     return cached.conn;
   }
 
@@ -29,12 +28,10 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
     };
-    console.log("Caches promise");
     cached.promise = connect(MONGODB_URI!, opts).then((mongoose) => {
       return mongoose;
     });
   }
-  console.log("First run");
   cached.conn = await cached.promise;
   return cached.conn;
 }
