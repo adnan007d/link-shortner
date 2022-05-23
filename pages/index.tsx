@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/Header";
 import Noob from "../components/Noob";
+import Pro from "../components/Pro";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <Noob />
+      <Pro />
     </div>
   );
 };
