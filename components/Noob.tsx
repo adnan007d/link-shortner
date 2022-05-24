@@ -1,6 +1,7 @@
 import React, { FormEventHandler, useState } from "react";
 import DuplicateIcon from "../assets/duplicate.svg";
-import axios from "axios";
+import axios, { Axios, AxiosError } from "axios";
+import { checkLink, createShortLink } from "../util/util";
 
 const Noob = () => {
   const [link, setLink] = useState<string>("");
@@ -10,18 +11,12 @@ const Noob = () => {
     e.preventDefault();
     const _link = link.trim();
     if (!_link) return alert("Link Cannot be empty");
-    if (
-      !!!_link.match(
-        /^(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/g
-      )
-    )
-      return alert("Invalid Link");
+    if (!checkLink(_link)) return alert("Invalid Link");
     try {
-      const response = await axios.post("/api/create", {
-        to: _link,
-      });
+      const response = await createShortLink(_link);
       setShortLink(response.data.newLink.short || "");
-    } catch (e) {
+    } catch (e: AxiosError | any) {
+      console.error(e.response);
       return alert("Something went wrong");
     }
   };
