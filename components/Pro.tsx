@@ -1,31 +1,34 @@
 import { AxiosError } from "axios";
 import React, { FormEventHandler, useEffect, useState } from "react";
 import { checkLink, createShortLink } from "../util/util";
+import PlusIcon from "../assets/plus.svg";
+import MinusIcon from "../assets/minus.svg";
+import CancelIcon from "../assets/cancel.svg";
+import TerminalIcon from "../assets/terminal.svg";
 
 const Pro = () => {
   const [commandHistory, setCommandHistory] = useState<string[]>([
     "help: for help",
   ]);
-  const [command, setCommand] = useState<string>("");
 
+  const [command, setCommand] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [loadingContent, setLoadingContent] = useState<string>("");
-  let i = 0;
+  const [loadingContent, setLoadingContent] = useState<string>(".");
+  const [i, setI] = useState<number>(0);
 
   useEffect(() => {
     if (!loading) return;
 
     const intervalId = setInterval(() => {
       setLoadingContent(loadingContent + ".");
-      ++i;
-      if (i == 4) {
-        setLoadingContent("");
-        i = 0;
+      setI(i + 1);
+      if (i == 2) {
+        setLoadingContent(".");
+        setI(0);
       }
     }, 500);
-
     return () => clearInterval(intervalId);
-  }, [loading]);
+  }, [loading, i]);
 
   const help = () => {
     setCommandHistory([
@@ -41,6 +44,7 @@ const Pro = () => {
   const clear = () => {
     setCommandHistory([]);
   };
+
   const create = async (link: string) => {
     if (!checkLink(link))
       return setCommandHistory([
@@ -93,9 +97,19 @@ const Pro = () => {
 
   return (
     <div className="console">
-      <div className="flex flex-col spay-2">
+      <div className="flex justify-between items-center mb-2 border-b border-white py-1">
+        <div>
+          <TerminalIcon className="pro-bar-icon" />
+        </div>
+        <div className="flex items-center space-x-1">
+          <PlusIcon className="pro-bar-icon" />
+          <MinusIcon className="pro-bar-icon" />
+          <CancelIcon className="pro-bar-icon" />
+        </div>
+      </div>
+      <div className="flex flex-col">
         {commandHistory.map((command, i) => (
-          <span>{command}</span>
+          <span key={i}>{command}</span>
         ))}
       </div>
       <form onSubmit={handleCommands}>

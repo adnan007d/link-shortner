@@ -27,7 +27,7 @@ const Noob = () => {
   };
 
   return (
-    <div className="flex justify-center mt-[20vh]">
+    <div className="flex justify-center">
       <form className="flex flex-col space-y-5" onSubmit={onSubmit}>
         <input
           type="text"
