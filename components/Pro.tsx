@@ -28,7 +28,7 @@ const Pro = () => {
       }
     }, 500);
     return () => clearInterval(intervalId);
-  }, [loading, i]);
+  }, [loading, i, loadingContent]);
 
   const help = () => {
     setCommandHistory([

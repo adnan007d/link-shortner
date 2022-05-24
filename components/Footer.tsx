@@ -10,17 +10,23 @@ const Footer = () => {
         <div className="flex space-x-10">
           <a
             target="_blank"
+            rel="noreferrer"
             href="https://www.reddit.com/user/AnEternityOfMisery"
           >
             <RedditIcon className="text-red-500 icon" />
           </a>
           <a
             target="_blank"
+            rel="noreferrer"
             href="https://www.instagram.com/an.eternity.of.misery"
           >
             <InstagramIcon className="text-[#bc2a8d] icon" />
           </a>
-          <a target="_blank" href="https://github.com/adnan007d">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/adnan007d"
+          >
             <GitHubIcon className="text-white icon" />
           </a>
         </div>
