@@ -1,6 +1,6 @@
 import React, { FormEventHandler, useState } from "react";
 import DuplicateIcon from "../assets/duplicate.svg";
-import axios, { Axios, AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { checkLink, createShortLink } from "../util/util";
 
 const Noob = () => {

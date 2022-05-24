@@ -15,6 +15,9 @@
   .pro-bar-icon {
     @apply h-5;
   }
+  .icon {
+    @apply transform transition duration-100 hover:scale-110 cursor-pointer h-5;
+  }
 }
 
 .console {
